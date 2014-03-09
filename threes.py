@@ -45,7 +45,7 @@ class Direction(object):
 
 class Board(object):
     def __init__(self):
-        self.width = 3
+        self.width = 4
         self.height = self.width
         self.init_prob = [0, 0, 0, 0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3]
         self.board = [[Tile(x, y, random.choice(self.init_prob)) for x in range(self.width)] for y in range(self.height)]
