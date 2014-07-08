@@ -6,11 +6,13 @@ from collections import OrderedDict
 import datetime
 from gmail import *
 
-REPORTING_EMAIL_ADDRES = "xxxxxxxxxx@gmail.com"
+REPORTING_EMAIL_ADDRES = "xxxxxxxxxx@xx.xx"
 TWITTER_CONSUMER_KEY = "xxxxxxxxxx"
 TWITTER_CONSUMER_SECRET = "xxxxxxxxxx"
 TWITTER_TOKEN = "xxxxxxxxxx"
 TWITTER_TOKEN_SECRET = "xxxxxxxxxx"
+GMAIL_ADDRESS = "xxxxxxxxxx@gmail.com"
+GMAIL_PASSWORD = "xxxxxxxxxx"
 
 NUM_REPORTING_TWEETS = 50
 CACHE_SIZE = 10000
@@ -18,7 +20,7 @@ CACHE_SIZE = 10000
 def send_deleted_tweet_mail(deleted_tweets):
     subject = "Deleted Tweet Report [" + str(datetime.datetime.today()) + "]"
     body = u"\n\n".join(deleted_tweets)
-    gmail = GMail("GMAIL_ADDRESS", "GMAIL_PASSWORD")
+    gmail = GMail(GMAIL_ADDRESS, GMAIL_PASSWORD)
     msg = Message(subject, to=REPORTING_EMAIL_ADDRES, text=body)
     gmail.send(msg)
 
