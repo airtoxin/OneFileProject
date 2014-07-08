@@ -21,3 +21,10 @@ __[Finished]__
 This program report deleted tweets on your twitter timeline by email.
 
 ![](images/dtr.png)
+
+###Usage
+1. install depend package `pip install twitter`
+
+2. rewrite `REPORTING_EMAIL_ADDRES`, `TWITTER_CONSUMER_KEY`, `TWITTER_CONSUMER_KEY_SECRET`, `TWITTER_TOKEN` and `TWITTER_TOKEN_SECRET`
+
+3. run program on background `nohup python deleted_tweets_reporter.py &`
