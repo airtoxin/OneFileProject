@@ -3,10 +3,6 @@
 
 from twitter import *
 from collections import OrderedDict
-import smtplib
-from email.MIMEText import MIMEText
-from email.Header import Header
-from email.Utils import formatdate
 import datetime
 from gmail import *
 
