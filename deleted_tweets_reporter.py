@@ -37,18 +37,21 @@ tweets_dict = OrderedDict()
 deleted_tweets = []
 
 for tweet in twitter_userstream.user():
-    if "id" in tweet and "text" in tweet and "user" in tweet and "screen_name" in tweet["user"]:
-        tweets_dict[tweet["id"]] = (tweet["user"]["screen_name"], tweet["text"])
-    elif "delete" in tweet and "status" in tweet["delete"] and "id" in tweet["delete"]["status"]:
-        deleted_tweet_id = tweet["delete"]["status"]["id"]
-        if deleted_tweet_id in tweets_dict:
-            deleted_tweet = tweets_dict[deleted_tweet_id]
-            deleted_tweets.append(u"{0}:\t{1}".format(deleted_tweet[0], deleted_tweet[1]))
+    try:
+        if "id" in tweet and "text" in tweet and "user" in tweet and "screen_name" in tweet["user"]:
+            tweets_dict[tweet["id"]] = (tweet["user"]["screen_name"], tweet["text"])
+        elif "delete" in tweet and "status" in tweet["delete"] and "id" in tweet["delete"]["status"]:
+            deleted_tweet_id = tweet["delete"]["status"]["id"]
+            if deleted_tweet_id in tweets_dict:
+                deleted_tweet = tweets_dict[deleted_tweet_id]
+                deleted_tweets.append(u"{0}:\t{1}".format(deleted_tweet[0], deleted_tweet[1]))
 
-    if len(deleted_tweets) >= NUM_REPORTING_TWEETS:
-        send_deleted_tweet_mail(deleted_tweets)
-        deleted_tweets = []
+        if len(deleted_tweets) >= NUM_REPORTING_TWEETS:
+            send_deleted_tweet_mail(deleted_tweets)
+            deleted_tweets = []
 
-    if len(tweets_dict) > CACHE_SIZE:
-        tweets_dict.popitem(last=False) # 最初に追加したのアイテムを削除
-
+        if len(tweets_dict) > CACHE_SIZE:
+            tweets_dict.popitem(last=False) # 最初に追加したのアイテムを削除
+    except Exception as e:
+        print 'type:' + str(type(e))
+        print 'message:' + e.message
